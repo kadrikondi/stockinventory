@@ -26,7 +26,7 @@ if (is_array($search)) {
             class = "quantity" 
             style = "display: none; vertical-align: bottom; padding: 5px;border: 1px solid; margin-left: 5px; width: 50px;" 
             min=1
-            value = 0
+            value=1
             max=<?=$quantity_remaining?>
             type="number"
             name="quantity<?=$id?>" id="quantity<?=$id?>">
@@ -43,8 +43,7 @@ if (is_array($search)) {
     echo 'No product found';
 }
 ?>
-<script>
-
+<script>    
 const validateQuantity = (data) => {
     const max = parseInt(data.target.max)
     const min = parseInt(data.target.min)
@@ -63,6 +62,20 @@ const validateQuantity = (data) => {
             data.target.value = 1
         }
     }
+    
+    var totalx = 0
+
+    prds = $('.product-search.reciept');
+
+    $.each(prds, function(k, v) {
+        console.log(totalx);
+        v = $(v);
+        current = parseInt(v.find('input.quantity').val()) * parseInt(v.find('label.price').text().slice(1))
+        totalx += current
+    });
+    if(!isNaN(totalx)){
+        $('.total').html('Total: ₦'+ totalx);
+    }
 }
 
 $('.add_to_product').on('click', function(e) {
@@ -80,48 +93,29 @@ $('.add_to_product').on('click', function(e) {
     });
 
     if(goAhead) {   
-        clone = $(this).closest('.product-search').clone();
-        clone.find('.add_to_product').hide();
-        clone.find('.set')
-        .css('display', 'inline-block')
-            .on('click', function() {
-                th = $(this).siblings('label[type=number]');
-                if($(this).hasClass('adder')) {
-                    if(Number(th.text()) < Number(th.siblings('label.rem').text())) {
-                        th.html(Number(th.text()) + 1);
-                    }
-                }else {
-                    if(Number(th.text()) >= 1){
-                        th.html(Number(th.text()) - 1);
-                    }
-                }
-                th.css('background-color', 'unset');
-
-                //
-                total = 0;
-                prds = $('.product-search');
-                $.each(prds, function(k, v) {
-                    v = $(v);
-                    current = Number(v.find('label.quantity').text()) * Number(v.find('label.price').text().slice(1));
-                    total += current;
-                });
-                $('.total').html('Total: N'+total);
-            });
-        clone.find('.rem').hide();
-        clone.find('.price').show();
+        clone = $(this)
+            .closest('.product-search')
+            .clone();
         clone
-            .find('input[type=number]').show()
+            .addClass('reciept')
+        clone
+            .find('.add_to_product')
+            .hide();
+        clone
+            .find('.rem')
+            .hide();
+        clone
+            .find('.price')
+            .show();
+        clone
+            .find('input.quantity')
+            .show("", function () {
+                $(this).focus()
+            })
             .on('keyup change focusout', (e) => {
                 validateQuantity(e)
             })
-        ;
-        clone
-            .find('.remove_from_products')
-            .css('display', 'inline-block')
-            .on('click', function(e) {
-                e.preventDefault();
-                $(this).closest('.product-search').remove();
-            });
+        clone.find('.remove_from_products').show()
         $('form.products-rec .form-body').prepend(clone);
     }
 });
