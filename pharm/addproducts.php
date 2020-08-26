@@ -62,7 +62,7 @@ if (isset($__message)) {
             $intface = new UserInterfaceProduct;
             $intface->new($cat);
             ?>
-        </select>
+        </select><br />
         <label>Quantity In</label>
         <input type=number name = "quantity_in" placeholder = "Quantity" min = 0><br>
         <label> Cost </label>
