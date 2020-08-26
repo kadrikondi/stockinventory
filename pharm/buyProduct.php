@@ -57,7 +57,7 @@ $cat = $product->viewProductsCategories();
         </form>
     </div>
     <script>
-        //Searching Products
+        // Searching Products
         $('.search').on('keyup', function() {
             console.log('hi');
             results = $('.results');
