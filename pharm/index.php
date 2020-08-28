@@ -23,10 +23,11 @@ extract($_SESSION);
         <!-- side menu -->
         <div class = "left-container">
             <div class = "logo">
-                <img src = "Capture111.png">
+               <a href="index.php"> <img src = "Capture111.png"></a>
             </div>
             <div class = "menu-container">
                 <span style = "margin-left: 3em;">Logged in:</span> <div class="manager"><?=$name?></div>
+               <div><ul style="list-style-type:none "><li><a href="index.php" style="padding:5px; background-color:#007480;color: white;">Home</a></li></ul> </div> 
                 <?php
                 if(isset($admin)){
                 ?>
