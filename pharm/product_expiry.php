@@ -10,13 +10,13 @@
 
 <script>
 $('form.expiry').on('submit', function(e) {
-    e.preventDefault();
-    k = $(this);
+    e.preventDefault()
+    k = $(this)
     data = {
         name: k.find('input[name=name]').val(),
         quantity: k.find('input[name=quantity]').val(),
         date: k.find('input[name=date]').val(),
-    };
+    }
     url = 'expiry_save_product.php';
     n = $('.notification-body');
     $.ajax({

@@ -81,7 +81,7 @@ if (isset($filter) && !empty($from) & !empty($to)) {
         <input type="submit" name="filter" value="Show Products" style = "margin-left: 0; margin-bottom: 0;">
     </form>
     </div>
-    <div class = "table-import">    
+    <div class = "table-import"> 
         <h1>Existing Invoices</h1>
         <div style="overflow-x:auto">
             <table>
@@ -94,7 +94,6 @@ if (isset($filter) && !empty($from) & !empty($to)) {
                         <th>Category</th>
                         <th>Quantity</th>
                         <th>Sold for</th>
-                        <th>NAFDAC</th>
                         <th>Staff</th>
                         <th>Total</th>
                         <th>Entry Date</th>
@@ -113,7 +112,6 @@ if (isset($filter) && !empty($from) & !empty($to)) {
                         <td><?= $f_category ?></td>
                         <td><?= $f_quantity ?></td>
                         <td><del>N</del> <?= $f_selling_price ?></td>
-                        <td><?= $f_NAFDAC ?></td>
                         <td><?= $f_username ?></td>
                         <td><del>N</del> <?= $f_selling_price * $f_quantity ?></td>
                         <td><?= $f_date ?></td>

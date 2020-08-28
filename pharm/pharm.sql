@@ -216,6 +216,12 @@ INSERT INTO `products` (`id`, `name`, `description`, `category`, `quantity_in`, 
 (10, 'parmdfffd', 'fgdsdsf', 'Tablets', 17, 0, 0, 14, '600', '800', 'AHD765B', NULL);
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `products_expiry`
+--
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `products_expiry`
@@ -242,38 +248,70 @@ INSERT INTO `products_expiry` (`id`, `name`, `quantity`, `setdate`, `expirydate`
 (15, 'phynyxin', 23, '2020-03-04 13:41:10', '2020-06-08 00:00:00');
 
 --
--- Indexes for dumped tables
+-- Table structure for table `products_expiry`
 --
 
+CREATE TABLE `products_expiry` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `setdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `expirydate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `products_expiry`
+--
+--
+-- Dumping data for table `products_expiry`
+--
+
+INSERT INTO `products_expiry` (`id`, `name`, `quantity`, `setdate`, `expirydate`) VALUES
+(6, 'Ampicilin', 3, '2020-03-03 00:01:06', '2020-03-03 00:00:00'),
+(9, 'panadol', 8, '2020-03-03 14:18:10', '2020-03-08 00:00:00'),
+(11, 'panadolyunnre', 11, '2020-03-04 11:41:43', '2020-03-10 00:00:00'),
+(13, 'kondicon', 8, '2020-03-04 13:39:45', '2020-04-01 00:00:00'),
+(14, 'kondixylinc', 3, '2020-03-04 13:40:28', '2020-04-01 00:00:00'),
+(15, 'phynyxin', 23, '2020-03-04 13:41:10', '2020-06-08 00:00:00');
+
+--
+-- Indexes for dumped tables
+--
 --
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
-
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
-
 --
 -- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
   ADD PRIMARY KEY (`id`);
-
 --
 -- Indexes for table `manager`
 --
 ALTER TABLE `manager`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `staff_id` (`staff_id`);
-
 --
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+--
+-- Indexes for table `products_expiry`
+--
+ALTER TABLE `products_expiry`
+  ADD PRIMARY KEY (`id`);
+--
+-- Indexes for table `products_expiry`
+--
+ALTER TABLE `products_expiry`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -285,7 +323,6 @@ ALTER TABLE `products_expiry`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
 --
 -- AUTO_INCREMENT for table `categories`
 --
@@ -316,6 +353,7 @@ ALTER TABLE `manager`
 ALTER TABLE `products`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
+
 --
 -- AUTO_INCREMENT for table `products_expiry`
 --
@@ -323,6 +361,12 @@ ALTER TABLE `products_expiry`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
+--
+-- AUTO_INCREMENT for table `products_expiry`
+--
+ALTER TABLE `products_expiry`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

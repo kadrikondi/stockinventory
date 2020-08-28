@@ -20,7 +20,8 @@ namespace Pharm {
         private $cost_price;
         private $damaged;
         private $selling_price;
-        private $NAFDAC;
+        private $date;
+
         public function __construct(
             $name = '',
             $description = '',
@@ -31,7 +32,7 @@ namespace Pharm {
             $cost_price = 0,
             $selling_price = 0,
             $damaged = 0,
-            $NAFDAC = ''
+            $date = ''
         ) {
             $this->query = new \Database\Query;
             $this->name = $name;
@@ -42,11 +43,11 @@ namespace Pharm {
             $this->quantity_remaining = $this->quantity_in - $this->quantity_out - $this->damaged;
             $this->cost_price = $cost_price;
             $this->selling_price = $selling_price;
-            $this->NAFDAC = $NAFDAC;
             $this->damaged = $damaged;
             $this->profit = $this->quantity_in - $this->quantity_out;
             $this->expenses = $this->quantity_in * $this->cost_price;
             $this->balance = $this->expenses;
+            $this->date = $date;
         }
 
         public function addProduct()
@@ -62,23 +63,73 @@ namespace Pharm {
                     &$this->damaged,
                     &$this->quantity_remaining,
                     &$this->cost_price,
-                    &$this->selling_price,
-                    &$this->NAFDAC
+                    &$this->selling_price
                 );
-                if (!$this->query->run(
+                $run = $this->query->run(
                     \Database\Query::addProduct(),
-                    'ssssssssss',
+                    'sssssssss',
                     $params
-                )) {
+                );
+                
+                
+                if (!$run) {
                     throw new \Exception();
                 } else {
-                    return array('message' => 'Product was added successfuly Last time out.');
+                    try {
+                        $id_to_insert = $run->insert_id;
+                        $param_expiry = array(
+                            &$id_to_insert,
+                            &$this->quantity_in,
+                            &$this->date
+                        );
+                        $run_expiry = $this->query->run(
+                            \Database\Query::insertProductIntoExpiryTable(),
+                            'sss',
+                            $param_expiry
+                        );
+                        return array(
+                            'message' => 'Product was added successfully last time out.'
+                        );
+                        
+                    } catch (\Exception $th){
+                        return array('message' => 'An error has occured!', 'error' => 2);
+                    }
                 }
             } catch (\Exception $th) {
                 return array('message' => 'An error has occured!', 'error' => 1);
             }
         }
-
+        public function removeExpired($id, $product_id, $quantity){
+            try {
+                $params = array(&$id);
+                $run = $this->query->run(
+                    \Database\Query::removeExpired(),
+                    's',
+                    $params
+                );
+                if (!$run) {
+                    throw new \Exception;
+                    return;
+                }
+                $params = array(
+                    &$quantity,
+                    &$quantity,
+                    &$product_id
+                );
+                $run = $this->query->run(
+                    \Database\Query::subtractExpired(),
+                    'sss',
+                    $params
+                );
+                if (!$run) {
+                    throw new \Exception;
+                    return;
+                }
+                return array('message' => 'success');
+            } catch (\Exception $th) {
+                return array('message' => 'An error has occured!', 'error' => 2);
+            }
+        }
         public function removeProduct($product_id = '')
         {   
             try {
@@ -295,6 +346,56 @@ namespace Pharm {
                 } else {
                     return array('message' => 'Successful!');
                 }
+            } catch (\Exception $th) {
+                return array('message' => 'An error has occured!', 'error' => 1);
+            }
+        }
+
+        public function update(
+            $product_id,
+            $quantity,
+            $date
+        ) {
+            try {
+                $params = array(
+                    &$product_id,
+                    &$quantity,
+                    &$date
+                );
+                $run = $this->query->run(
+                    \Database\Query::insertProductIntoExpiryTable(),
+                    'sss',
+                    $params
+                );
+                if(!$run) {
+                    throw new \Exception();
+                    return;
+                }
+                $this->updateQuantity($product_id, $quantity);
+                return array('message'=> 'success');
+            } catch (\Exception $th) {
+                return array('message' => 'An error has occured!', 'error' => 1);
+            }
+        }
+        
+        public function updateQuantity($product_id, $quantity) {
+            try {
+                $params = array(
+                    &$quantity,
+                    &$quantity,
+                    &$product_id 
+                );
+                $run = $this->query->run(
+                    \Database\Query::updateProductQuantity(),
+                    'sss',
+                    $params
+                );
+                print_r($run);
+                if (!$run) {
+                    throw new \Exception();
+                    return;
+                }
+                return array('message' => 'success');
             } catch (\Exception $th) {
                 return array('message' => 'An error has occured!', 'error' => 1);
             }

@@ -9,8 +9,10 @@ $product = new Product;
 $cat = $product->viewProductsCategories();
 extract($_REQUEST);
 if (
-    !empty($name) && $quantity_in > 0
-    && !empty($NAFDAC)
+    !empty($name)
+    && $quantity_in > 0
+    && !empty($date)
+    && $existing === "false"
 ) {
     $action = new Product(
         $name,
@@ -22,10 +24,16 @@ if (
         $cost_price,
         $selling_price,
         0,
-        $NAFDAC
+        $date
     );
+
     $act = $action->addProduct();
     extract($act, EXTR_PREFIX_ALL, '_');
+}
+
+if($existing === "true") {
+    $product = new Product;
+    $update = $product->update($id, $quantity_in, $date);
 }
 
 ?>

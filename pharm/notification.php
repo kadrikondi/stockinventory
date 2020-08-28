@@ -33,16 +33,17 @@ $notif_exp = $product->expired();
 </style>
 <div class = "small-info">Click Expired product to remove.</div>
 <?php
-foreach($notification as $k=>$v) {
+foreach($notification as $k => $v) {
     extract($v);
 ?>
     <div class="notify">
-        <div class = "notify-inner"><div style = "font-weight: 600;display: inline-block;font-family: Calibri;"><?=$name?> (<?= $quantity?>)</div><div style = "font-size:11px; float:right;font-family: Calibri;">Expires soon</div></div>
+        <div class = "notify-inner">
+            <div style = "font-weight: 600;display: inline-block;font-family: Calibri;"><?=$name?> (<?= $quantity?>)</div><div style = "font-size:11px; float:right;font-family: Calibri;">Expires soon</div></div>
     </div>
     <?php
 }
 
-if(is_array($notif_exp)){
+if (is_array($notif_exp)) {
     foreach($notif_exp as $k=>$v) {
         extract($v);
     ?>

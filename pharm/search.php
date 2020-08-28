@@ -42,20 +42,24 @@ if (is_array($search)) {
 } else {
     echo 'No product found';
 }
+
 ?>
-<script>    
+<script>
 const validateQuantity = (data) => {
     const max = parseInt(data.target.max)
     const min = parseInt(data.target.min)
     const value = parseInt(data.target.value)
+
     if (data.type === 'onchange'|| data.type === "keyup") {
         if (value > max) {
             data.target.value = max
         }
+
         if (value < min) {
             data.target.value = min
         }
     }
+
     if (data.type === 'focusout') {
         console.log(value)
         if (isNaN(value)) {
@@ -65,48 +69,50 @@ const validateQuantity = (data) => {
     
     var totalx = 0
 
-    prds = $('.product-search.reciept');
+    prds = $('.product-search.reciept')
 
     $.each(prds, function(k, v) {
-        console.log(totalx);
-        v = $(v);
+        console.log(totalx)
+        v = $(v)
         current = parseInt(v.find('input.quantity').val()) * parseInt(v.find('label.price').text().slice(1))
         totalx += current
-    });
-    if(!isNaN(totalx)){
-        $('.total').html('Total: ₦'+ totalx);
+    })
+
+    if (!isNaN(totalx)) {
+        $('.total').html('Total: ₦'+ totalx)
     }
 }
 
 $('.add_to_product').on('click', function(e) {
-    e.preventDefault();
-    l = $('form.products-rec').find('.product-search');
-    en = $(this);
-    goAhead = true;
+    e.preventDefault()
+    l = $('form.products-rec').find('.product-search')
+    en = $(this)
+    goAhead = true
     $.each(l, function (k, v) {
-        v = $(v);
-        if(v.find('label.name').html() == en.siblings('.name').html())
-        {
-            goAhead = false;
-            v.find('label.set.adder').trigger('click');
+        v = $(v)
+        if (v.find('label.name').html() == en.siblings('.name').html()) {
+            goAhead = false
+            v
+            .find('label.set.adder')
+            .trigger('click')
         }
-    });
+    })
 
-    if(goAhead) {   
+    if(goAhead) {
         clone = $(this)
             .closest('.product-search')
-            .clone();
+            .clone()
         clone
             .addClass('reciept')
         clone
             .find('.add_to_product')
-            .hide();
+            .hide()
         clone
             .find('.rem')
-            .hide();
+            .hide()
         clone
             .find('.price')
-            .show();
+            .show()
         clone
             .find('input.quantity')
             .show("", function () {
@@ -116,7 +122,7 @@ $('.add_to_product').on('click', function(e) {
                 validateQuantity(e)
             })
         clone.find('.remove_from_products').show()
-        $('form.products-rec .form-body').prepend(clone);
+        $('form.products-rec .form-body').prepend(clone)
     }
-});
+})
 </script>
