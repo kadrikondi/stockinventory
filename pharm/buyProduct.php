@@ -58,6 +58,7 @@ $cat = $product->viewProductsCategories();
     </div>
     <script>
         // Searching Products
+        
         $('.search').on('keyup', function() {
             console.log('hi');
             results = $('.results');
