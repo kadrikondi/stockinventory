@@ -1,0 +1,2 @@
+# stockinventory
+store management system

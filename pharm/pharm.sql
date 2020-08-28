@@ -214,12 +214,12 @@ INSERT INTO `products` (`id`, `name`, `description`, `category`, `quantity_in`, 
 (8, 'Pennicilin', 'For rubbing wounds', 'Antiseptic', 7, 0, 0, 7, '1200', '1500', 'WOEIRJQ', NULL),
 (9, 'Pentamine', 'For Homeo Statis', 'Tablets', 14, 0, 0, 10, '1200', '1500', 'PAOSLEK78', NULL),
 (10, 'parmdfffd', 'fgdsdsf', 'Tablets', 17, 0, 0, 14, '600', '800', 'AHD765B', NULL);
-<<<<<<< master
+
 -- --------------------------------------------------------
 --
 -- Table structure for table `products_expiry`
 --
-=======
+-- --------------------------------------------------------
 
 -- --------------------------------------------------------
 
@@ -227,7 +227,6 @@ INSERT INTO `products` (`id`, `name`, `description`, `category`, `quantity_in`, 
 -- Table structure for table `products_expiry`
 --
 
->>>>>>> master
 CREATE TABLE `products_expiry` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
@@ -235,17 +234,11 @@ CREATE TABLE `products_expiry` (
   `setdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `expirydate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-<<<<<<< master
---
--- Dumping data for table `products_expiry`
---
-=======
 
 --
 -- Dumping data for table `products_expiry`
 --
 
->>>>>>> master
 INSERT INTO `products_expiry` (`id`, `name`, `quantity`, `setdate`, `expirydate`) VALUES
 (6, 'Ampicilin', 3, '2020-03-03 00:01:06', '2020-03-03 00:00:00'),
 (9, 'panadol', 8, '2020-03-03 14:18:10', '2020-03-08 00:00:00'),
@@ -253,10 +246,34 @@ INSERT INTO `products_expiry` (`id`, `name`, `quantity`, `setdate`, `expirydate`
 (13, 'kondicon', 8, '2020-03-04 13:39:45', '2020-04-01 00:00:00'),
 (14, 'kondixylinc', 3, '2020-03-04 13:40:28', '2020-04-01 00:00:00'),
 (15, 'phynyxin', 23, '2020-03-04 13:41:10', '2020-06-08 00:00:00');
-<<<<<<< master
-=======
 
->>>>>>> master
+--
+-- Table structure for table `products_expiry`
+--
+
+CREATE TABLE `products_expiry` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `setdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `expirydate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `products_expiry`
+--
+--
+-- Dumping data for table `products_expiry`
+--
+
+INSERT INTO `products_expiry` (`id`, `name`, `quantity`, `setdate`, `expirydate`) VALUES
+(6, 'Ampicilin', 3, '2020-03-03 00:01:06', '2020-03-03 00:00:00'),
+(9, 'panadol', 8, '2020-03-03 14:18:10', '2020-03-08 00:00:00'),
+(11, 'panadolyunnre', 11, '2020-03-04 11:41:43', '2020-03-10 00:00:00'),
+(13, 'kondicon', 8, '2020-03-04 13:39:45', '2020-04-01 00:00:00'),
+(14, 'kondixylinc', 3, '2020-03-04 13:40:28', '2020-04-01 00:00:00'),
+(15, 'phynyxin', 23, '2020-03-04 13:41:10', '2020-06-08 00:00:00');
+
 --
 -- Indexes for dumped tables
 --
@@ -298,6 +315,12 @@ ALTER TABLE `products_expiry`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `products_expiry`
+--
+ALTER TABLE `products_expiry`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 --
@@ -305,46 +328,39 @@ ALTER TABLE `products_expiry`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-<<<<<<< master
-=======
 
->>>>>>> master
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-<<<<<<< master
-=======
 
->>>>>>> master
 --
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
-<<<<<<< master
-=======
 
->>>>>>> master
 --
 -- AUTO_INCREMENT for table `manager`
 --
 ALTER TABLE `manager`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-<<<<<<< master
-=======
 
->>>>>>> master
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-<<<<<<< master
-=======
 
->>>>>>> master
+
+--
+-- AUTO_INCREMENT for table `products_expiry`
+--
+ALTER TABLE `products_expiry`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+COMMIT;
+
 --
 -- AUTO_INCREMENT for table `products_expiry`
 --
