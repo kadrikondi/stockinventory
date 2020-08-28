@@ -5,39 +5,65 @@ class Query {
     // Product Class
     public static function addProduct() {
         return "INSERT INTO products(name, description, category, quantity_in, quantity_out, quantity_damaged, \n
-		quantity_remaining, cost_price, selling_price, NAFDAC) \n
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		quantity_remaining, cost_price, selling_price) \n
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	}
 	
     public static function deleteProduct () {
         return 'DELETE FROM products WHERE id = ?';
 	}
 
+	public static function removeExpired () {
+		return 'DELETE FROM expiry_table WHERE id = ?';
+	}
+
+	public static function subtractExpired () {
+		return 'UPDATE products SET quantity_remaining = quantity_remaining - ?, quantity_in = quantity_in - ? WHERE id = ?';
+	}
+
 	public static function viewAllProducts () {
-		return 'SELECT * FROM products';
+		return 'SELECT products.*, expiry_table.* FROM products LEFT JOIN (SELECT *, id as exp_id, DATEDIFF(expiry_date, NOW()) as exp FROM expiry_table) AS expiry_table ON products.id = expiry_table.product_id';
 	}
 
 	public static function updateProductDetails () {
-		return "UPDATE products SET name = ?, description=?, category = ?, quantity_in = ?, quantity_out=?, quantity_damaged = ?, \n
-		quantity_remaining = ?, cost_price=?, selling_price=?, NAFDAC = ? WHERE id = ?";
+		return "UPDATE products SET name = ?, description = ?, category = ?, quantity_in = ?, quantity_out=?, quantity_damaged = ?, \n
+		quantity_remaining = ?, cost_price=?, selling_price=? WHERE id = ?";
 	}
 
 	public static function setExpiry () {
 		return "INSERT into products_expiry (name, quantity, expirydate) VALUES (?, ?, ?)";
 	}
 
+	
 	public static function notify () {
 		return "SELECT * FROM products_expiry WHERE DATEDIFF(expirydate, NOW()) < 60 AND DATEDIFF(expirydate, NOW()) >= 1";
 	}
-
-	public static function expired () {
-		return "SELECT * FROM products_expiry WHERE DATEDIFF(expirydate, NOW()) <= 0";
+	
+	public static function insertProductIntoExpiryTable () {
+		return "INSERT INTO expiry_table (product_id, quantity, expiry_date) values (?, ?, 	?)";
+	}
+	
+	public static function updateProductQuantity () {
+		return "UPDATE products SET quantity_in = quantity_in + ?, quantity_remaining = quantity_remaining + ? WHERE id = ?";
 	}
 
 	public static function delete () {
 		return "DELETE FROM products_expiry WHERE id = ?";
 	}
+	
+	public static function expired () {
+		return "SELECT * FROM products_expiry WHERE DATEDIFF(expirydate, NOW()) <= 0";
+	}
+
+	public static function deleteExpiredProduct () {
+		return "DELETE FROM expiry_table WHERE id = ?";
+	}
+
+	public static function notifyAboutToExpire () {
+		return "SELECT * FROM products_expory WHERE DATEDIFF(expiry_date, NOW()) < 60 AND DATEDIFF(expiry_date, NOW()) >= 1";
+	}
 	// Product Categories
+
 	public static function viewProductsCategories () {
 		return "SELECT id, category FROM categories";
 	}
@@ -58,8 +84,8 @@ class Query {
 		return 'SELECT * FROM products WHERE id = ?';
 	}
 
-	public static function search() {
-		return 'SELECT * FROM products WHERE name LIKE ?';
+	public static function search () {
+		return 'SELECT * FROM products WHERE name LIKE ? LIMIT 5';
 	}
 
 	public static function productSale () {
@@ -118,7 +144,7 @@ class Query {
 
 	public static function fetchAllInvoice () {
 		return "SELECT invoice.id, products.name, products.description, products.category, invoice.quantity, \n
-		products.selling_price, products.NAFDAC, manager.username, customer.name AS customer_name, \n
+		products.selling_price, manager.username, customer.name AS customer_name, \n
 		CONCAT(DAYNAME(invoice.date), ', ', DATE_FORMAT(invoice.date, \"%M %d %Y\")) as date FROM invoice \n
 		LEFT JOIN products ON products.id = invoice.product_id \n
 		LEFT JOIN customer ON customer.id = invoice.customer_id \n

@@ -450,6 +450,7 @@ form.expiry .form-head {
 }
 
 .notification {
+    display: none;
     position: absolute;
     bottom: 2em;
     width: 15em;
