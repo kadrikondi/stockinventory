@@ -222,6 +222,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
+<<<<<<< HEAD
 INSERT INTO `products` (`id`, `name`, `description`, `category`, `quantity_in`, `quantity_out`, `quantity_damaged`, `quantity_remaining`, `cost_price`, `selling_price`) VALUES
 (3, 'Tetracycline', 'Used in curing all forms of HIV/AIDs. Blah, blah, blah', 'Syrup', -290, 8, 4, -298, '400', '500'),
 (4, 'bayo', 'This is probably the same thing that I need to do all over again isn\'t it?', 'Tablets', 4, 0, 0, 0, '100', '300'),
@@ -238,6 +239,23 @@ INSERT INTO `products` (`id`, `name`, `description`, `category`, `quantity_in`, 
 (15, 'Tetrapycycline', '', 'Tablets', 3, 0, 0, 3, '400', '500'),
 (16, 'crutchet', '', 'Infusion', 11, 0, 0, 11, '100', '200'),
 (17, 'crutchet', '', 'Infusion', 11, 0, 0, 11, '100', '200');
+=======
+INSERT INTO `products` (`id`, `name`, `description`, `category`, `quantity_in`, `quantity_out`, `quantity_damaged`, `quantity_remaining`, `cost_price`, `selling_price`, `NAFDAC`, `expiry_date`) VALUES
+(3, 'Tetracycline', 'Used in curing all forms of HIV/AIDs. Blah, blah, blah', 'Syrup', 10, 8, 4, 2, '400', '500', 'PAOWIEUR', NULL),
+(4, 'bayo', 'This is probably the same thing that I need to do all over again isn\'t it?', 'Tablets', 4, 0, 0, 0, '100', '300', 'oweirty', NULL),
+(5, 'bayoo', 'all of my friends', 'Surgical', 6, 0, 0, 2, '100', '1000', '890293JD', NULL),
+(6, 'Tetraspirin', 'This is the last description', 'Infusion', 3, 0, 0, 1, '300', '500', 'QWEROIU', NULL),
+(7, 'Ampicilin', 'This is a short description', 'Tablets', 6, 0, 0, 4, '600', '800', 'AOSDFIJ8', NULL),
+(8, 'Pennicilin', 'For rubbing wounds', 'Antiseptic', 7, 0, 0, 7, '1200', '1500', 'WOEIRJQ', NULL),
+(9, 'Pentamine', 'For Homeo Statis', 'Tablets', 14, 0, 0, 10, '1200', '1500', 'PAOSLEK78', NULL),
+(10, 'parmdfffd', 'fgdsdsf', 'Tablets', 17, 0, 0, 14, '600', '800', 'AHD765B', NULL);
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `products_expiry`
+--
+-- --------------------------------------------------------
+>>>>>>> 8b49044e509101e1ca53104a03d91a2ab44f44a3
 
 -- --------------------------------------------------------
 
@@ -252,7 +270,37 @@ CREATE TABLE `products_expiry` (
   `setdate` datetime NOT NULL DEFAULT current_timestamp(),
   `expirydate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<<<<<<< HEAD
+=======
 
+--
+-- Dumping data for table `products_expiry`
+--
+>>>>>>> 8b49044e509101e1ca53104a03d91a2ab44f44a3
+
+INSERT INTO `products_expiry` (`id`, `name`, `quantity`, `setdate`, `expirydate`) VALUES
+(6, 'Ampicilin', 3, '2020-03-03 00:01:06', '2020-03-03 00:00:00'),
+(9, 'panadol', 8, '2020-03-03 14:18:10', '2020-03-08 00:00:00'),
+(11, 'panadolyunnre', 11, '2020-03-04 11:41:43', '2020-03-10 00:00:00'),
+(13, 'kondicon', 8, '2020-03-04 13:39:45', '2020-04-01 00:00:00'),
+(14, 'kondixylinc', 3, '2020-03-04 13:40:28', '2020-04-01 00:00:00'),
+(15, 'phynyxin', 23, '2020-03-04 13:41:10', '2020-06-08 00:00:00');
+
+--
+-- Table structure for table `products_expiry`
+--
+
+CREATE TABLE `products_expiry` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `setdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `expirydate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `products_expiry`
+--
 --
 -- Dumping data for table `products_expiry`
 --
@@ -261,7 +309,12 @@ INSERT INTO `products_expiry` (`id`, `name`, `quantity`, `setdate`, `expirydate`
 (6, 'Ampicilin', 3, '2020-03-03 00:01:06', '2020-03-03 00:00:00'),
 (9, 'panadol', 8, '2020-03-03 14:18:10', '2020-03-08 00:00:00'),
 (13, 'kondicon', 8, '2020-03-04 13:39:45', '2020-04-01 00:00:00'),
+<<<<<<< HEAD
 (14, 'kondixylinc', 3, '2020-03-04 13:40:28', '2020-04-01 00:00:00');
+=======
+(14, 'kondixylinc', 3, '2020-03-04 13:40:28', '2020-04-01 00:00:00'),
+(15, 'phynyxin', 23, '2020-03-04 13:41:10', '2020-06-08 00:00:00');
+>>>>>>> 8b49044e509101e1ca53104a03d91a2ab44f44a3
 
 --
 -- Indexes for dumped tables
@@ -311,6 +364,12 @@ ALTER TABLE `products_expiry`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `products_expiry`
+--
+ALTER TABLE `products_expiry`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -326,12 +385,15 @@ ALTER TABLE `categories`
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
+<<<<<<< HEAD
 --
 -- AUTO_INCREMENT for table `expiry_table`
 --
 ALTER TABLE `expiry_table`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
+=======
+>>>>>>> 8b49044e509101e1ca53104a03d91a2ab44f44a3
 --
 -- AUTO_INCREMENT for table `invoice`
 --
@@ -348,8 +410,21 @@ ALTER TABLE `manager`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
+<<<<<<< HEAD
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
+=======
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+
+--
+-- AUTO_INCREMENT for table `products_expiry`
+--
+ALTER TABLE `products_expiry`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+COMMIT;
+
+>>>>>>> 8b49044e509101e1ca53104a03d91a2ab44f44a3
 --
 -- AUTO_INCREMENT for table `products_expiry`
 --
