@@ -45,7 +45,7 @@ if (is_array($search)) {
 
 ?>
 <script>
-const validateQuantity = (data) => {
+validateQuantity = (data) => {
     const max = parseInt(data.target.max)
     const min = parseInt(data.target.min)
     const value = parseInt(data.target.value)

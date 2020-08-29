@@ -22,7 +22,7 @@ class Query {
 	}
 
 	public static function viewAllProducts () {
-		return 'SELECT products.*, expiry_table.* FROM products LEFT JOIN (SELECT *, id as exp_id, DATEDIFF(expiry_date, NOW()) as exp FROM expiry_table) AS expiry_table ON products.id = expiry_table.product_id';
+		return 'SELECT products.*, expiry_table.* FROM products RIGHT JOIN (SELECT *, id as exp_id, MIN(DATEDIFF(expiry_date, NOW())) as exp FROM expiry_table GROUP BY product_id) AS expiry_table ON products.id = expiry_table.product_id';
 	}
 
 	public static function updateProductDetails () {

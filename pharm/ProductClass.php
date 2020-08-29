@@ -111,7 +111,7 @@ namespace Pharm {
                     throw new \Exception;
                     return;
                 }
-                $params = array(
+                $new_params = array(
                     &$quantity,
                     &$quantity,
                     &$product_id
@@ -119,8 +119,9 @@ namespace Pharm {
                 $run = $this->query->run(
                     \Database\Query::subtractExpired(),
                     'sss',
-                    $params
+                    $new_params
                 );
+                print_r($new_params);
                 if (!$run) {
                     throw new \Exception;
                     return;
