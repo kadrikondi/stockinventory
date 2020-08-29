@@ -138,8 +138,8 @@ const autoUpdateDOM = (existing) => {
         )
 }
 
+var existing = false;
 $('form.add-product-form input[name=name]').on('keyup', function () {
-    existing = false
     data = $(this).val()
     c = $(this)
     autoUpdateDOM(existing)
@@ -218,6 +218,7 @@ $('form.add-product-form').on('submit', function(e) {
                     'value': 'Add Product', 
                     'enabled': 'enabled'
                 })
+            location.reload()
         }
     }).done(
         function() {
