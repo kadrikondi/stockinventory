@@ -7,7 +7,6 @@ require_once 'messageClass.php';
 require_once 'productClass.php';
 $product = new Product;
 $cat = $product->viewProductsCategories();
-print_r($_REQUEST);
 extract($_REQUEST);
 if (
     !empty($name)

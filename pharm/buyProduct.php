@@ -90,21 +90,23 @@ $cat = $product->viewProductsCategories();
             var run = true;
             $.each(listed, function(k, v) {
                 v = $(v);
-                if(v.find('label.quantity').html() == 0) {
+                if(v.find('input.quantity').val() == 0) {
                     run = false;
-                    v.find('label.quantity').css('background-color', 'red');
+                    v.find('input.quantity').css('background-color', 'red');
                 }
             });
             if(run){
+                console.log(this_data)
                 $.each(listed, function(k, v){
                     v = $(v);
                     this_data = {
                         'id': v.find('label.id').html(),
-                        'number': v.find('label.quantity').html(),
+                        'number': v.find('input.quantity').val(),
                         'amount': v.find('label.price').html().slice(1),
                     }
                     data.push(this_data);
                 });
+                console.log(this_data);
                 customer = k.find('select[name=customer]').val();
                 $.ajax({
                     url: url,

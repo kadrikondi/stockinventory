@@ -17,6 +17,10 @@ class Query {
 		return 'DELETE FROM expiry_table WHERE id = ?';
 	}
 
+	public static function removeTotallyFromExpired () {
+		return 'DELETE FROM expiry_table WHERE product_id = ?';
+	}
+
 	public static function subtractExpired () {
 		return 'UPDATE products SET quantity_remaining = quantity_remaining - ?, quantity_in = quantity_in - ? WHERE id = ?';
 	}
@@ -68,6 +72,10 @@ class Query {
 		return "SELECT id, category FROM categories";
 	}
 
+	public static function fetchCategory () {
+		return "SELECT * FROM categories WHERE category = ?";
+	}
+
 	public static function addProductsCategory () {
 		return 'INSERT INTO categories(category) VALUES (?)';
 	}
@@ -85,7 +93,7 @@ class Query {
 	}
 
 	public static function search () {
-		return 'SELECT * FROM products WHERE name LIKE ? LIMIT 5';
+		return 'SELECT products.*, expiry_table.* FROM products RIGHT JOIN (SELECT *, id as exp_id, MIN(DATEDIFF(expiry_date, NOW())) as exp FROM expiry_table GROUP BY product_id) AS expiry_table ON products.id = expiry_table.product_id WHERE name LIKE ?';
 	}
 
 	public static function productSale () {
