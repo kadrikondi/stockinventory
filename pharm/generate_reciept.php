@@ -33,7 +33,6 @@ foreach ($_REQUEST as $key => $value) {
         <td>Category</td>
         <td>Quantity</td>
         <td>Selling Price </td>
-        <td>NAFDAC Reg. No. </td>
         <td>Total</td>
         </tr>
     </th>
@@ -48,7 +47,6 @@ foreach ($_REQUEST as $key => $value) {
                 <td><?= $category ?></td>
                 <td><?= $squantity ?></td>
                 <td><?= $selling_price ?></td>
-                <td><?= $NAFDAC ?></td>
                 <td><?= $squantity * $selling_price?></td>
             </tr>
         <?php

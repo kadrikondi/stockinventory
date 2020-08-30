@@ -42,7 +42,7 @@ $pr = $product->viewAllProducts();
         extract($pr[$i]);
         $expiry = ($exp < 30) ? 'expiring' : '';
         $info = 'expires in '.$exp.' days'
-    ?>
+        ?>
         <tr class="<?=$expiry?>">
             <td><?= $name ?></td>
             <td><?= $description ?></td>
@@ -61,8 +61,8 @@ $pr = $product->viewAllProducts();
             }
             ?></td>
             <td>
-                <a href="update_product.php?id=<?= $id ?>&action=update&name=<?= $name ?>&description=<?= $description ?>&category=<?= $category ?>&quantity_in=<?= $quantity_in ?>&quantity_out=<?= $quantity_out ?>&quantity_remaining=<?= $quantity_remaining ?>&quantity_damaged=<?= $quantity_damaged ?>&cost_price=<?= $cost_price ?>&selling_price=<?= $selling_price ?>&NAFDAC=<?= $NAFDAC ?>">Edit</a>
-                <a class = "delete" href="update_product.php?id=<?= $id ?>&action=delete">Delete</a>
+                <a href="update_product.php?id=<?= $product_id ?>&action=update&name=<?= $name ?>&description=<?= $description ?>&category=<?= $category ?>&quantity_in=<?= $quantity_in ?>&quantity_out=<?= $quantity_out ?>&quantity_remaining=<?= $quantity_remaining ?>&quantity_damaged=<?= $quantity_damaged ?>&cost_price=<?= $cost_price ?>&selling_price=<?= $selling_price ?>">Edit</a>
+                <a class = "delete" href="update_product.php?id=<?= $product_id ?>&action=delete">Delete</a>
             </td>
         </tr>
     <?php
@@ -82,7 +82,7 @@ $('button.remove').on('click', function () {
         data: JSON.parse(data),
         success: function () {
             $('.notify').css('display', 'block')
-            setTimeout(function(){
+            setTimeout(function () {
                 $('.notify').css('display', 'none')
             }, 2000)
         }
@@ -90,26 +90,28 @@ $('button.remove').on('click', function () {
 })
 
 $('.products-table a').on('click', function(e) {
-    e.preventDefault();
-    k = $(this);
+    e.preventDefault()
+    k = $(this)
     url = $(this)
-        .attr('href');
+        .attr('href')
+
     if(k.hasClass('delete')) {
-        appender = 0;
+        appender = 0
     }
+
     $.ajax({
         url: url,
         beforeSend: function() {
             $('.products-table a')
-                .show();
-            k.hide();
+                .show()
+            k.hide()
             $('.products-edit-class')
-                .remove();
+                .remove()
         },
         success: function(data) {
-            if(typeof appender !== "undefined"){
+            if(typeof appender !== "undefined") {
                 $('.settings-menu')
-                    .trigger('click');
+                    .trigger('click')
             } else {
                 $('.appended')
                     .append(
@@ -117,9 +119,8 @@ $('.products-table a').on('click', function(e) {
                             .addClass('products-edit-class')
                             .css('display', 'inline-block')
                             .html(data)
-                    );
+                    )
             }
-            
         }
     })
 });

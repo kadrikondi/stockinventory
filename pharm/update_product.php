@@ -5,16 +5,18 @@ if(!isset($_REQUEST['action']) && !isset($_REQUEST['submit'])){
 
 require_once 'ProductClass.php';
 
+$product = new \Pharm\Product;
 extract($_REQUEST);
 if(isset($_REQUEST['submit'])) {
     extract($_REQUEST);
-    $product = new \Pharm\Product;
     $return = $product->updateProducts(
-        $uname, $udescription, $ucategory, $quantity_in, 
-        $uquantity_out, $uquantity_damaged,
-        $uquantity_remaining, $ucost_price, 
+        $uname, 
+        $udescription, 
+        $ucategory, 
+        $ucost_price, 
         $uselling_price, $id
     );
+
     switch(array_key_exists('error', $return)){
         case true:
             echo $return['error']['message'];
@@ -23,9 +25,11 @@ if(isset($_REQUEST['submit'])) {
             header('location: allproducts.php?mesage=Last update was successful&type=successful');
     }
 }
+
 switch($action) {
     case 'update': 
 ?>
+
 <form class = "edit-product" action = "pr_product.php" method="post" style = "width: 50em;">
     <div class = "form-head">Edit</div>
     <div class = "form-body">
@@ -39,24 +43,6 @@ switch($action) {
 
             <label>Category</label>
             <input type="text" name="ucategory" maxlength="100" value="<?=$category?>">
-            
-            <label>NAFDAC</label>
-            <input type="text" name="uNAFDAC" maxlength="20" value="<?=$NAFDAC?>">
-        </div>
-
-        <div class = "quantity" style = "font-weight:600;">Quantity</div>
-        <div class = "quantity-body">
-            <label>In</label>
-            <input type="number" name="uquantity_in" maxlength="2" value="<?=$quantity_in?>">
-
-            <label>Out</label>
-            <input type="number" name="uquantity_out" maxlength="2" value="<?=$quantity_out?>">
-
-            <label>Damaged</label>
-            <input type="number" name="uquantity_damaged" maxlength="2" value="<?=$quantity_damaged?>">
-
-            <label>Remaining</label>
-            <input type="number" name="uquantity_remaining" maxlength="2" value="<?=$quantity_remaining?>">
         </div>
 
         <div class = "prices" style = "font-weight:600;">Prices</div>
@@ -66,7 +52,6 @@ switch($action) {
 
             <label>Sale</label>
             <input type="text" name="uselling_price" maxlength="5" value="<?=$selling_price?>">
-
            
         </div>
             <input type = "hidden" name = "id" value = "<?=$id?>">
@@ -79,12 +64,6 @@ switch($action) {
 $('.details').on('click', function() {
     $('.details-body').toggle();
     $('.quantity-body').hide();
-    $('.prices-body').hide();
-});
-
-$('.quantity').on('click', function() {
-    $('.quantity-body').toggle();
-    $('.details-body').hide();
     $('.prices-body').hide();
 });
 
@@ -103,12 +82,7 @@ $('form.edit-product').on('submit', function(e) {
         'udescription': $('form.edit-product input[name=udescription]').val(),
         'ucategory': $('form.edit-product input[name=ucategory]').val(),
         'ucost_price': $('form.edit-product input[name=ucost_price]').val(),
-        'uNAFDAC': $('form.edit-product input[name=uNAFDAC]').val(),
-        'uselling_price': $('form.edit-product input[name=uselling_price]').val(),
-        'uquantity_in': $('form.edit-product input[name=uquantity_in]').val(),
-        'uquantity_out': $('form.edit-product input[name=uquantity_out]').val(),
-        'uquantity_damaged': $('form.edit-product input[name=uquantity_damaged]').val(),
-        'uquantity_remaining': $('form.edit-product input[name=uquantity_remaining]').val()
+        'uselling_price': $('form.edit-product input[name=uselling_price]').val()
     };
 
     $.ajax({
@@ -141,9 +115,13 @@ $('form.edit-product').on('submit', function(e) {
 <?php
     break;
     case 'delete':
-        echo 'last delete was not successful"&category=error';
+        $removed = $product->removeProduct($id);
+        if ($removed) {
+            echo json_encode(array(
+                'message' => 'remove done!'
+            ));
+        }
     break;
     default:
         //
-
 }

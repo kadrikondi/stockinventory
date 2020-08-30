@@ -32,7 +32,7 @@ if (is_array($search)) {
             name="quantity<?=$id?>" id="quantity<?=$id?>">
         <!-- <label class = "set add-subtract adder"> + </label> -->
         <!-- <label class = "set add-subtract substracter"> - </label> -->
-        <label class = "id" style = "display:none"><?=$id?></label>
+        <label class = "id" style = "display:none"><?=$product_id?></label>
         <a href ="" class ="add_to_product"> Pick </a>
         <a href ="" class = "remove_from_products" style= "display:none;"> &times; </a>
     </div>
@@ -45,7 +45,7 @@ if (is_array($search)) {
 
 ?>
 <script>
-const validateQuantity = (data) => {
+validateQuantity = (data) => {
     const max = parseInt(data.target.max)
     const min = parseInt(data.target.min)
     const value = parseInt(data.target.value)

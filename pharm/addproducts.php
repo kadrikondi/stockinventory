@@ -88,7 +88,9 @@ if (isset($__message)) {
             $intface = new UserInterfaceProduct;
             $intface->new($cat);
             ?>
-        </select><br />
+        </select>
+        <a href="#new">New category</a>
+        <br />
         <div>
             <label>Quantity In</label>
             <input type=number name = "quantity_in" placeholder = "Quantity" min = 0><br>
@@ -137,6 +139,23 @@ const autoUpdateDOM = (existing) => {
             $('<div />').html('Creating a new product!')
         )
 }
+
+$("a[href='#new']").on('click', function(e) {
+    e.preventDefault()
+    $(this).hide();
+    newCategory = $('<input />')
+        .attr({
+            'class': 'category',
+            'name': 'category',
+            'placeholder': 'Type a new Category here',
+            'type': 'text'
+        })
+    selectCategory = $(this).siblings('[name=category]').remove();
+    
+    $(this).before(
+        newCategory
+    )
+})
 
 var existing = false;
 $('form.add-product-form input[name=name]').on('keyup', function () {
@@ -193,7 +212,7 @@ $('form.add-product-form').on('submit', function(e) {
     data = {
         name: $('form.add-product-form input[name=name]').val(),
         desc: $('form.add-product-form textarea[name=desc]').val(),
-        category: $('form.add-product-form select[name=category]').val(),
+        category: $('form.add-product-form [name=category]').val(),
         quantity_in: $('form.add-product-form input[name=quantity_in]').val(),
         cost_price: $('form.add-product-form input[name=cost_price]').val(),
         selling_price: $('form.add-product-form input[name=selling_price]').val(),

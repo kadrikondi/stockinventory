@@ -87,6 +87,23 @@ namespace Pharm {
                             'sss',
                             $param_expiry
                         );
+                        $check_params = array(
+                            &$this->category
+                        );
+                        $run_category_check = $this->query->run(
+                            \Database\Query::fetchCategory(),
+                            's',
+                            $check_params
+                        );
+                        $result = $run_category_check->get_result();
+                        print_r($check_params);
+                        if($run_category_check->num_rows != 1) {
+                            $this->query->run(
+                                \Database\Query::addProductsCategory(),
+                                's',
+                                $check_params
+                            );
+                        };
                         return array(
                             'message' => 'Product was added successfully last time out.'
                         );
@@ -111,7 +128,7 @@ namespace Pharm {
                     throw new \Exception;
                     return;
                 }
-                $params = array(
+                $new_params = array(
                     &$quantity,
                     &$quantity,
                     &$product_id
@@ -119,8 +136,9 @@ namespace Pharm {
                 $run = $this->query->run(
                     \Database\Query::subtractExpired(),
                     'sss',
-                    $params
+                    $new_params
                 );
+                print_r($new_params);
                 if (!$run) {
                     throw new \Exception;
                     return;
@@ -148,9 +166,16 @@ namespace Pharm {
                         );
                         if (!$run) {
                             throw new errorException();
-                        } else {
-                            return "Your last delete was successful!";
                         }
+                        $new_run = $this->query->run(
+                            \Database\Query::removeTotallyFromExpired(),
+                            's',
+                            $params
+                        );
+                        if(!$new_run) {
+                            throw new errorException();
+                        }
+                        return true;
                 }
             } catch (wrongInput $ex) {
                 return 'Your last delete was not successful! You\'d have to try that again';
