@@ -1,5 +1,5 @@
 <?php
-require_once 'productClass.php';
+require_once 'ProductClass.php';
 $product = new \Pharm\Product;
 $pr = $product->viewAllProducts();
 ?>
