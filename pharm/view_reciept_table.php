@@ -44,7 +44,7 @@ if(sizeof($inv) > 0){
             <th>Category</th>
             <th>Quantity</th>
             <th>Sold for</th>
-            <th>NAFDAC</th>
+          
             <th>Staff</th>
             <th>Total</th>
             <th>Entry Date</th>
@@ -63,7 +63,7 @@ if(sizeof($inv) > 0){
             <td><?= $f_category ?></td>
             <td><?= $f_quantity ?></td>
             <td><del>N</del> <?= $f_selling_price ?></td>
-            <td><?= $f_NAFDAC ?></td>
+          
             <td><?= $f_username ?></td>
             <td><del>N</del> <?= $f_selling_price * $f_quantity ?></td>
             <td><?= $f_date ?></td>

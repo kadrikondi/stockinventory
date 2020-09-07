@@ -30,8 +30,8 @@ class Query {
 	}
 
 	public static function updateProductDetails () {
-		return "UPDATE products SET name = ?, description = ?, category = ?, quantity_in = ?, quantity_out=?, quantity_damaged = ?, \n
-		quantity_remaining = ?, cost_price=?, selling_price=? WHERE id = ?";
+		return "UPDATE products SET name = ?, description = ?, category = ?,  \n
+		 cost_price=?, selling_price=? WHERE id = ?";
 	}
 
 	public static function setExpiry () {

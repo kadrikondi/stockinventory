@@ -430,13 +430,10 @@ namespace Pharm {
             $name,
             $description,
             $category,
-            $quantity_in,
-            $quantity_out,
-            $quantity_damaged,
-            $quantity_remaining,
+            
             $cost_price,
             $selling_price,
-            $nafdac,
+           
             $id
         ) {
             try {
@@ -444,13 +441,11 @@ namespace Pharm {
                 try {
                     //code
                     $params  = array(
-                        &$name, &$description, &$category, &$quantity_in,
-                        &$quantity_out, &$quantity_damaged,
-                        &$quantity_remaining, &$cost_price, &$selling_price, &$nafdac, &$id
+                        &$name, &$description, &$category,  &$cost_price, &$selling_price,  &$id
                     );
                     if ($this->query->run(
                         \Database\Query::updateProductDetails(),
-                        'sssssssssss',
+                        'ssssss',
                         $params
                     )) {
                         return array('message' => 'done');
