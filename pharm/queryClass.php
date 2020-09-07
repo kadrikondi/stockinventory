@@ -152,7 +152,7 @@ class Query {
 
 	public static function fetchAllInvoice () {
 		return "SELECT invoice.id, products.name, products.description, products.category, invoice.quantity, \n
-		products.selling_price, manager.username, customer.name AS customer_name, \n
+		products.selling_price, products.cost_price, manager.username, customer.name AS customer_name, \n
 		CONCAT(DAYNAME(invoice.date), ', ', DATE_FORMAT(invoice.date, \"%M %d %Y\")) as date FROM invoice \n
 		LEFT JOIN products ON products.id = invoice.product_id \n
 		LEFT JOIN customer ON customer.id = invoice.customer_id \n
