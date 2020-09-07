@@ -6,7 +6,7 @@ use Pharm\Customer as Customer;
 
 require_once 'messageClass.php';
 
-require_once 'productClass.php';
+require_once 'ProductClass.php';
 
 $product = new Product;
 $search = $product->search($_REQUEST['data']);

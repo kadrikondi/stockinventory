@@ -5,7 +5,7 @@ use UserInterface\GeneralDocInterface;
 use UserInterface\Product as UserInterfaceProduct;
 
 require_once 'messageClass.php';
-require_once 'productClass.php';
+require_once 'ProductClass.php';
 $product = new Product;
 $cat = $product->viewProductsCategories();
 extract($_REQUEST);

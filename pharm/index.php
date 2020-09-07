@@ -23,7 +23,7 @@ extract($_SESSION);
         <!-- side menu -->
         <div class = "left-container">
             <div class = "logo">
-               <a href="index.php"> <img src = "Capture111.png"></a>
+               <a href="index.php"> <img src = "capture111.png"></a>
             </div>
             <div class = "menu-container">
                 <span style = "margin-left: 3em;">Logged in:</span> <div class="manager"><?=$name?></div>
@@ -85,32 +85,39 @@ extract($_SESSION);
                         <div class = "card-main">Sell Product</div>
                         <div class = "card-dets">to customer</div>
                     </div>
+
+                    <div class = "card summary-card">
+                        <div class = "card-main">Summary</div>
+                        <div class = "card-dets">How many and how much?</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="jquery-3.2.1.min.js"></script>
     <script>
-        var content = $('.content');
-        var products = 0;
-        var check;
+        var content = $('.content')
+        var products = 0
+        var check
         $('.card').on('click', function() {
-            e = $(this);
+            e = $(this)
             if($(this).hasClass('products-card')) {
-                url = 'allproducts.php';
+                url = 'allproducts.php'
             } else if ($(this).hasClass('customer-card')) {
-                url = 'customer.php';
+                url = 'customer.php'
             } else if ($(this).hasClass('addproducts-card')) {
-                url = "addproducts.php";
+                url = "addproducts.php"
             } else if ($(this).hasClass('records-card')){
-                url = "reciepts.php";
+                url = "reciepts.php"
             } else if ($(this).hasClass('sellproduct-card')) {
-                url = "buyproduct.php";
+                url = "buyproduct.php"
+            } else if ($(this).hasClass('summary-card')) {
+                url = "summary.php"
             }
             if(typeof check != "undefined") {
                 if(e.get(0) === check.get(0)) {
-                    shrinker ();
-                    return;
+                    shrinker ()
+                    return
                 }
             }
             
@@ -120,46 +127,46 @@ extract($_SESSION);
             $.ajax({
                 url: url,
                 beforeSend: function() {
-                    $('.card').addClass('small');
+                    $('.card').addClass('small')
                 },
                 success: function(data) {
-                    $('.appended').remove();
-                    content.append($('<div />').addClass('appended').append(data));
+                    $('.appended').remove()
+                    content.append($('<div />').addClass('appended').append(data))
                 }
-            });
-            check = $(this);
-        });
+            })
+            check = $(this)
+        })
         shrinker = function () {
-            $('.card').removeClass('small');
-            $('.appended').remove();
-            check = undefined;
+            $('.card').removeClass('small')
+            $('.appended').remove()
+            check = undefined
         }
         //side Menus
         $('menu-item').on('click', function() {
             if($(this).hasClass('dash-menu')) {
-                shrinker();
+                shrinker()
             }
             if($(this).hasClass('products-menu')) {
-                $('.products-card').trigger('click');
+                $('.products-card').trigger('click')
             }
-        });
+        })
 
         $('.settings-menu').on('click', function() {
             
             $.ajax({
                 url: 'manager.php',
                 beforeSend: () => {
-                    $('.content').html('');    
+                    $('.content').html('')    
                 },
                 success: (data) => {
                     $('.content').html(data)
                 }
-            });
-        });
+            })
+        })
 
         $('.notification-inner').on('click', function() {
-            url = 'product_expiry.php';
-            n = $(this).siblings('.notification-body');
+            url = 'product_expiry.php'
+            n = $(this).siblings('.notification-body')
             $.ajax({
                 url: url,
                 beforeSend: function () {
@@ -167,19 +174,19 @@ extract($_SESSION);
                         $('<div />')
                             .addClass('loading')
                             .append('loading...')
-                    );
+                    )
                     n.removeClass('overflow')
                 },
                 success: function(data) {
                     n.html(data)
                 }
-            });
+            })
 
-        });
+        })
         $('.notification-real').on('click', function() {
-            url = 'notification.php';
+            url = 'notification.php'
             n = $(this).siblings('.notification-body')
-            n.toggle();
+            n.toggle()
             $.ajax({
                 url: url,
                 beforeSend: function () {
@@ -187,14 +194,14 @@ extract($_SESSION);
                         $('<div />')
                             .addClass('loading')
                             .append('loading...')
-                    );
-                    n.addClass('overflow');
+                    )
+                    n.addClass('overflow')
                 },
                 success: function(data) {
                     n.html(data)
                 }
-            });
-        });
+            })
+        })
     </script>
 </body>
 </html>
