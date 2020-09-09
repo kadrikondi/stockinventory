@@ -40,7 +40,7 @@ for ($i = 0; $i < sizeof($inv); $i++) {
 }
 ?>
 
- 
+
 <table class = "products-table">
     <thead>
         <tr>
@@ -61,9 +61,9 @@ for ($i = 0; $i < sizeof($inv); $i++) {
         $sales = 0;
         $cost = 0;
         for($j = 0; $j < sizeof($v); $j++) {
-            $quantity += $v[$j][quantity];
-            $sales += $v[$j][selling_price];
-            $cost += $v[$j][cost_price];
+            $quantity += $v[$j]["quantity"];
+            $sales += $v[$j]["selling_price"];
+            $cost += $v[$j]["cost_price"];
         }
     ?>
     <tr class="<?=$k?>">
