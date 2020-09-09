@@ -31,8 +31,7 @@ if (isset($filter) && !empty($from) & !empty($to)) {
 } else {
     $inv = $invoice->viewAll();
 }
-?>
-<?php
+
 $loop = array();
 for ($i = 0; $i < sizeof($inv); $i++) {
     extract($inv[$i]);
@@ -40,75 +39,112 @@ for ($i = 0; $i < sizeof($inv); $i++) {
 }
 ?>
 
- 
-<table class = "products-table">
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Total Cost Price</th>
-            <th>Total Sales </th>
-            <th>Total Profit Made</th>
-            <th>Total Quantity Sold</th>
+<form class = "records-form" action = "view_summary.php">
+    <div class = "form-head" >Filter</div>
+    <div class = "form-body filter">
+        <label style ="width: unset;">Show from </label>
+        <input style = "padding:5px; vertical-align:super;" type="date" name="from">
+        <label style ="width: unset;"> to</label>
+        <input style = "padding:5px; vertical-align:super;" type="date" name="to">
+        <input type="submit" name="filter" value="Show Products" style = "margin-left: 0; margin-bottom: 0;">
+    </div>
+</form>
+<div class = "table-import"> 
+    <table class = "products-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Total Cost Price</th>
+                <th>Total Sales </th>
+                <th>Total Profit Made</th>
+                <th>Total Quantity Sold</th>
+            </tr>
+        </thead>
+    <tbody>
+        <?php
+        $totalQuantity = 0;
+        $totalSales = 0;
+        $totalCost = 0;
+        foreach ($loop as $k => $v) {
+            $quantity = 0;
+            $sales = 0;
+            $cost = 0;
+            for($j = 0; $j < sizeof($v); $j++) {
+                $quantity += $v[$j]['quantity'];
+                $sales += $v[$j]['selling_price'];
+                $cost += $v[$j]['cost_price'];
+            }
+        ?>
+        <tr class="<?=$k?>">
+            <td><?=$k?></td>
+            <td>N <?=$cost?></td>
+            <td>N <?=$sales?></td>
+            <td>N <?=$sales - $cost?> </td>
+            <td><?=$quantity?></td>
         </tr>
-    </thead>
-<tbody>
-    <?php
-    $totalQuantity = 0;
-    $totalSales = 0;
-    $totalCost = 0;
-    foreach ($loop as $k => $v) {
-        $quantity = 0;
-        $sales = 0;
-        $cost = 0;
-        for($j = 0; $j < sizeof($v); $j++) {
-            $quantity += $v[$j][quantity];
-            $sales += $v[$j][selling_price];
-            $cost += $v[$j][cost_price];
+        <?php
+            $totalQuantity += $quantity;
+            $totalSales += $sales;
+            $totalCost += $cost;
         }
-    ?>
-    <tr class="<?=$k?>">
-        <td><?=$k?></td>
-        <td>N <?=$cost?></td>
-        <td>N <?=$sales?></td>
-        <td>N <?=$sales - $cost?> </td>
-        <td><?=$quantity?></td>
-    </tr>
-    <?php
-        $totalQuantity += $quantity;
-        $totalSales += $sales;
-        $totalCost += $cost;
-    }
-    ?>
-</tbody>
-</table>
-<style>
-.d-title {
-    font-size: 18px;
-    font-weight: bolder;
-}
-.inf {
-    margin-right: 20px;
-    display: inline-block;
-}
-.d-child {
-    font-size: 20px;
-}
-</style>
-<div style="text-align:center">
-    <div class="inf">
-        <div class="d-title">Total Quantity of Products Sold</div>
-        <div class="d-child"><?=$totalQuantity?></div>
-    </div>
-    <div class="inf">
-        <div class="d-title">Total Sales </div>
-        <div class="d-child">N <?=$totalSales?></div>
-    </div>
-    <div class="inf">
-        <div class="d-title">Total Costs </div>
-        <div class="d-child">N <?=$totalCost?></div>
-    </div>
-    <div class="inf">
-        <div class="d-title">Total Profits</div>
-        <div class="d-child">N <?=$totalSales - $totalCost?></div>
-    </div>
-<div>
+        ?>
+    </tbody>
+    </table>
+
+    <div style="text-align:center">
+        <div class="inf">
+            <div class="d-title">Total Quantity of Products Sold</div>
+            <div class="d-child"><?=$totalQuantity?></div>
+        </div>
+        <div class="inf">
+            <div class="d-title">Total Sales </div>
+            <div class="d-child">N <?=$totalSales?></div>
+        </div>
+        <div class="inf">
+            <div class="d-title">Total Costs </div>
+            <div class="d-child">N <?=$totalCost?></div>
+        </div>
+        <div class="inf">
+            <div class="d-title">Total Profits</div>
+            <div class="d-child">N <?=$totalSales - $totalCost?></div>
+        </div>
+    <div>
+</div>
+
+<script>
+$('form.records-form').on('submit', function(e) {
+    e.preventDefault();
+    k = $(this);
+    console.log($(this).get(0));
+    url = k
+        .attr('action');
+    holder = $('div.table-import');
+
+    data = {
+        'from': k.find('input[name=from]').val(),
+        'to': k.find('input[name=to]').val(),
+        'customer': k.find('select[name=customer]').val()
+    };
+    console.log(data);
+    $.ajax({
+        url: url,
+        data: data,
+        beforeSend: function () {
+            k.find('input[type=submit]')
+                .css({
+                    'value': 'Checking..', 
+                    'disabled': 'disabled'
+                });
+        },
+        success: function (data) {
+            k.find('input[type=submit]')
+                .css({
+                    'value': 'Show Products', 
+                    'enabled': 'enabled'
+                })
+            holder.html('');
+            holder.append(data);
+        }
+    })
+}); 
+</script>
