@@ -191,6 +191,18 @@ a.delete:hover {
     background-color: rgba(255, 0, 0, .75);
 }
 
+.d-title {
+    font-size: 18px;
+    font-weight: bolder;
+}
+.inf {
+    margin-right: 20px;
+    display: inline-block;
+}
+.d-child {
+    font-size: 20px;
+}
+
 table,
 td,
 th {
@@ -198,6 +210,7 @@ th {
     border-collapse: collapse;
     font-size: 16px;
     text-align: left;
+    width: max-content;
 }
 
 tr td:nth-of-type(1) {
@@ -268,7 +281,6 @@ textarea {
 
 form {
     margin: 4px;
-    width: 24em;
     text-align: start;
     background-color: white;
     border-radius: 4px;
@@ -496,7 +508,7 @@ form.expiry .form-head {
         padding: 1em;
         margin: 0;
         width: unset;
-        height auto;
+        height: auto;
     }
 
     form {
