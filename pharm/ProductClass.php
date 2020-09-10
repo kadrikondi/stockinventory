@@ -96,7 +96,6 @@ namespace Pharm {
                             $check_params
                         );
                         $result = $run_category_check->get_result();
-                        print_r($check_params);
                         if($run_category_check->num_rows != 1) {
                             $this->query->run(
                                 \Database\Query::addProductsCategory(),
@@ -138,7 +137,6 @@ namespace Pharm {
                     'sss',
                     $new_params
                 );
-                print_r($new_params);
                 if (!$run) {
                     throw new \Exception;
                     return;
@@ -415,7 +413,6 @@ namespace Pharm {
                     'sss',
                     $params
                 );
-                print_r($run);
                 if (!$run) {
                     throw new \Exception();
                     return;
