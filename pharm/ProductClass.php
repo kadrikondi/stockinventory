@@ -415,7 +415,7 @@ namespace Pharm {
                     'sss',
                     $params
                 );
-                print_r($run);
+                print_r($params);
                 if (!$run) {
                     throw new \Exception();
                     return;
