@@ -31,6 +31,8 @@ if (
     extract($act, EXTR_PREFIX_ALL, '_');
 }
 
+print_r($_REQUEST);
+
 if($existing === "true") {
     $product = new Product;
     $update = $product->update($id, $quantity_in, $date);

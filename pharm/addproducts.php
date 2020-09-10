@@ -189,7 +189,8 @@ $('form.add-product-form input[name=name]').on('keyup', function () {
                             .html(v.name)
                             .on('click', function() {
                                 c.val(v.name)
-                                storedId = v.id
+                                console.log(v)
+                                storedId = v.product_id
                                 $(this).closest('.product-searched').html('')
                                 existing = true
                                 autoUpdateDOM(existing)
