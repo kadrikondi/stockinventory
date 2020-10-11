@@ -30,6 +30,7 @@ if (is_array($search)) {
             max=<?=$quantity_remaining?>
             type="number"
             name="quantity<?=$id?>" id="quantity<?=$id?>">
+        <label class="this-price" style="width: 4em"></label>
         <!-- <label class = "set add-subtract adder"> + </label> -->
         <!-- <label class = "set add-subtract substracter"> - </label> -->
         <label class = "id" style = "display:none"><?=$product_id?></label>
@@ -75,11 +76,13 @@ validateQuantity = (data) => {
         console.log(totalx)
         v = $(v)
         current = parseInt(v.find('input.quantity').val()) * parseInt(v.find('label.price').text().slice(1))
+        v.find('.this-price')
+        .html('₦ '+current)
         totalx += current
     })
 
     if (!isNaN(totalx)) {
-        $('.total').html('Total: ₦'+ totalx)
+        $('.total').html('Total: ₦ '+ totalx)
     }
 }
 

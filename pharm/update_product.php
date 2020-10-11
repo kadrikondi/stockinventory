@@ -10,8 +10,8 @@ extract($_REQUEST);
 if(isset($_REQUEST['submit'])) {
     extract($_REQUEST);
     $return = $product->updateProducts(
-        $uname, 
-        $udescription, 
+        $uname,
+        $udescription,
         $ucategory, 
         $ucost_price, 
         $uselling_price, $id
@@ -26,7 +26,7 @@ if(isset($_REQUEST['submit'])) {
     }
 }
 
-switch($action) {
+switch ($action) {
     case 'update': 
 ?>
 
