@@ -40,7 +40,7 @@ $cat = $product->viewProductsCategories();
         </form>
         <form action="gen_reciept.php" class="products-rec" type="post">
             <div class="form-head">Reciept</div>
-            <div class="form-body"></div>
+            <div class="st form-body"></div>
             <div>
             <select name="customer">
             <?php
