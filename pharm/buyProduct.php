@@ -80,6 +80,8 @@ $cat = $product->viewProductsCategories();
             });
         });
 
+        
+
         $('form.products-rec').on('submit', function(e) {
             e.preventDefault();
             var this_data;
