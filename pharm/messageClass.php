@@ -48,7 +48,7 @@ namespace UserInterface {
     {
         public static function footer()
         {
-            echo "&copy; 2019. Kondi Team!";
+            echo "&copy; 2020 KondiPress Team!";
         }
     }
 }

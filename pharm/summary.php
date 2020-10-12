@@ -49,7 +49,7 @@ for ($i = 0; $i < sizeof($inv); $i++) {
         <input type="submit" name="filter" value="Show Products" style = "margin-left: 0; margin-bottom: 0;">
     </div>
 </form>
-<div class = "table-import"> 
+<div class = "table-import" style="overflow: auto; display:block; height:500px;"> 
     <table class = "products-table">
         <thead>
             <tr>
@@ -98,19 +98,38 @@ for ($i = 0; $i < sizeof($inv); $i++) {
         </div>
         <div class="inf">
             <div class="d-title">Total Sales </div>
-            <div class="d-child">N <?=$totalSales?></div>
+            <div class="d-child" id='ts'>  <?=$totalSales?></div>
+                  
         </div>
         <div class="inf">
             <div class="d-title">Total Costs </div>
-            <div class="d-child">N <?=$totalCost?></div>
+            <div class="d-child" id='tc'>N <?=$totalCost?></div>
+         
+           
         </div>
         <div class="inf">
             <div class="d-title">Total Profits</div>
-            <div class="d-child">N <?=$totalSales - $totalCost?></div>
+            <div class="d-child" id='pr'>N <?=$totalSales - $totalCost?></div>
         </div>
     <div>
 </div>
+<script>
 
+          var totalS='<?php echo $totalSales;?>'
+           var totalC='<?php echo $totalCost;?>'
+             var profit='<?php echo $totalSales - $totalCost;?>'
+    //    add comma to thousand values eg 333333 will b 33,3333
+            function NC(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+  var  ts= document.getElementById("ts");
+
+ts.innerHTML= 'N '+ NC(totalS);
+ var  tc= document.getElementById("tc");
+ tc.innerHTML= 'N '+ NC(totalC);
+ var  pr= document.getElementById("pr");
+ pr.innerHTML= 'N '+ NC(profit);
+            </script>
 <script>
 $('form.records-form').on('submit', function(e) {
     e.preventDefault();

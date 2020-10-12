@@ -125,7 +125,7 @@ $cat = $product->viewProductsCategories();
                     $('<a />').on('click', function(e) {
                         e.preventDefault();
                         window.location = 'index.php';
-                    }).html('Close'),
+                    }).html('<button style="background-color:red;color:white">Close</button>'),
                 k);
                 window.print();
 
