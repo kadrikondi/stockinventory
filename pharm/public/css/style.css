@@ -303,6 +303,10 @@ form.products-rec .form-body {
     overflow: auto;
 }
 
+.st.form-body {
+    max-height: unset!important;
+}
+
 .form-body {
     padding: .8em;
 }

@@ -34,8 +34,8 @@ if (is_array($search)) {
         <!-- <label class = "set add-subtract adder"> + </label> -->
         <!-- <label class = "set add-subtract substracter"> - </label> -->
         <label class = "id" style = "display:none"><?=$product_id?></label>
-        <a href ="" class ="add_to_product"> Pick </a>
-        <a href ="" class = "remove_from_products" style= "display:none;"> &times; </a>
+        <a href ="" class ="add_to_product"> Pick </a><br>
+        <label class = "remove_from_products" style= "display:none; font-size: 11px; cursor: pointer"> &times; remove</label>
     </div>
     <?php
         $i++;
@@ -45,6 +45,7 @@ if (is_array($search)) {
 }
 
 ?>
+
 <script>
 validateQuantity = (data) => {
     const max = parseInt(data.target.max)
@@ -125,6 +126,10 @@ $('.add_to_product').on('click', function(e) {
                 validateQuantity(e)
             })
         clone.find('.remove_from_products').show()
+        .bind('click', function() {
+            $(this).parent('div').remove()
+            validateQuantity(e);
+        })
         $('form.products-rec .form-body').prepend(clone)
     }
 })
