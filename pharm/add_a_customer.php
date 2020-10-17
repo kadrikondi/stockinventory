@@ -18,8 +18,9 @@ if (isset($_REQUEST['user'])) {
         {
             echo 'done';
         } else {
-            echo 'successful!';
+            echo '<p style="color:white;background-color:green;">Customer Add Successful!</p>';
         }
     }
 }
+$man = $manager->fetch();
 ?>

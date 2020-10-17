@@ -81,9 +81,9 @@ if (isset($filter) && !empty($from) & !empty($to)) {
         <input type="submit" name="filter" value="Show Products" style = "margin-left: 0; margin-bottom: 0;">
     </form>
     </div>
-    <div class = "table-import"> 
+    <div class = "table-import"  > 
         <h1>Existing Invoices</h1>
-        <div style="overflow-x:auto">
+        <div style="overflow: auto; display:block; height:400px;">
             <table>
                 <thead>
                     <tr>

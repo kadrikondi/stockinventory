@@ -24,10 +24,13 @@ $total_sales = 0;
 }
 </style>
     <!-- <div style = "text-align: right; margin-right: 7em;"><a href = "buyProduct.php" class = "link">Buy product</a></div> -->
-<div style="overflow: auto">
-    <table class = "products-table">
+<div  style="overflow: auto; display:block; height:500px;">
+   <input id="gfg" type="text" 
+                 placeholder="Search here"> 
+
+    <table class = "products-table"  >
         <thead>
-            <tr>
+            <tr style="width:100%;">
                 <th>S/N</th>
                 <th>Name</th>
                 <th>Actions</th>
@@ -43,7 +46,7 @@ $total_sales = 0;
                 <th>Info</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="geeks">
         <?php
 
         for ($i = 0; $i < sizeof($pr); $i++) {
@@ -94,23 +97,43 @@ $total_sales = 0;
     <div style="text-align:center; padding:10px">
         <div class="inf">
             <div class="d-title">Total quantity of products in stock</div>
-            <div class="d-child"><?=$total_quantity?></div>
+            <div class="d-child" id="tq"><?=$total_quantity?></div>
         </div>
         <div class="inf">
             <div class="d-title">Possible sales </div>
-            <div class="d-child">N <?=$total_sales?></div>
+            <div class="d-child" id='ts'>N <?=$total_sales?></div>
         </div>
         <div class="inf">
             <div class="d-title">Possible Cost </div>
-            <div class="d-child">N <?=$total_cost?></div>
+            <div class="d-child" id='tc'>N <?=$total_cost?></div>
         </div>
         <div class="inf">
             <div class="d-title">Possible Profit</div>
-            <div class="d-child">N <?=$total_sales - $total_cost?></div>
+            <div class="d-child" id='pr'>N <?=$total_sales - $total_cost?></div>
         </div>
     <div>
 </div>
+<script>
+          var tQ= '<?php echo $total_quantity;?>'
+          var totalS='<?php echo $total_sales;?>'
+           var totalC='<?php echo $total_cost;?>'
+             var profit='<?php echo $total_sales - $total_cost;?>'
+    //    add comma to thousand values eg 333333 will b 33,3333
+            function NC(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+var  tq= document.getElementById("tq");
+ tq.innerHTML= 'N '+ NC(tQ);
+  var  ts= document.getElementById("ts");
 
+ts.innerHTML= 'N '+ NC(totalS);
+ var  tc= document.getElementById("tc");
+ tc.innerHTML= 'N '+ NC(totalC);
+ var  pr= document.getElementById("pr");
+ pr.innerHTML= 'N '+ NC(profit);
+ 
+
+            </script>
 <div class = "notify">
     <div>Successful</div>
     <div style="font-size: 10px">Reload to see changes</div>
@@ -165,4 +188,14 @@ $('.products-table a').on('click', function(e) {
         }
     })
 });
+// search implement
+ $(document).ready(function() { 
+                $("#gfg").on("keyup", function() { 
+                    var value = $(this).val().toLowerCase(); 
+                    $("#geeks tr").filter(function() { 
+                        $(this).toggle($(this).text() 
+                        .toLowerCase().indexOf(value) > -1) 
+                    }); 
+                }); 
+            }); 
 </script>
