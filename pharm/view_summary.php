@@ -28,7 +28,7 @@ for ($i = 0; $i < sizeof($inv); $i++) {
 if(sizeof($inv) > 0){
 ?>
 
-<table class = "products-table">
+<table class = "products-table" style="overflow: auto; display:block; height:200px;">
     <thead>
         <tr>
             <th>Product</th>
@@ -68,14 +68,15 @@ if(sizeof($inv) > 0){
         ?>
     </tbody>
 </table>
-<div style="text-align:center">
-        <div class="inf">
+<div style="text-align:center; ">
+        <div class="inf" style="padding-bottom:20px;">
             <div class="d-title">Total Quantity of Products Sold</div>
             <div class="d-child"><?=$totalQuantity?></div>
         </div>
         <div class="inf">
             <div class="d-title">Total Sales </div>
             <div class="d-child">N <?=$totalSales?></div>
+            
         </div>
         <div class="inf">
             <div class="d-title">Total Costs </div>

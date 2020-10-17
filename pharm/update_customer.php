@@ -10,7 +10,7 @@ if(isset($action) && $action == 'delete') {
 }
 ?>
 <form class = "customer-edit-form" action = "delete_customer.php" method = "get">
-    <div class = "form-head"> Edit Manager Details </div>
+    <div class = "form-head"> Edit Customer Details </div>
     <div class = "form-body">
         <input type="hidden" name="id" value = <?=$id?>>
         <label>Name</label>
