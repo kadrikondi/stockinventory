@@ -411,6 +411,14 @@ input.search {
     background-color: #6f5b56;
 }
 
+.products-rec * {
+    font-size: 10px;
+}
+
+.products-rec label {
+    width: unset!important
+}
+
 .add_to_product,
 a.remove_from_products {
     float: right;

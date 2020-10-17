@@ -34,7 +34,7 @@ if (is_array($search)) {
         <!-- <label class = "set add-subtract adder"> + </label> -->
         <!-- <label class = "set add-subtract substracter"> - </label> -->
         <label class = "id" style = "display:none"><?=$product_id?></label>
-        <a href ="" class ="add_to_product"> Pick </a><br>
+        <a href ="" class ="add_to_product"> Pick </a>
         <label class = "remove_from_products" style= "display:none; font-size: 11px; cursor: pointer"> &times; remove</label>
     </div>
     <?php
