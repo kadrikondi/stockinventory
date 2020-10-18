@@ -123,7 +123,9 @@ $cat = $product->viewProductsCategories();
                 });
 
                 $('body .container').hide();
-                $('body').append(
+                $('body')
+                .addClass('smalls')
+                .append(
                     $('<a />').on('click', function(e) {
                         e.preventDefault();
                         window.location = 'index.php';
@@ -134,7 +136,7 @@ $cat = $product->viewProductsCategories();
             }
             else {
                 x = $('form.products-rec .form-body')
-                    .css('background-color', 'rgba(255,0,0,.07');
+                    .css('backgproductsround-color', 'rgba(255,0,0,.07');
                 $('form.products-rec .form-body')
                 x.prepend(
                     $('<div />')
