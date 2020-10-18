@@ -84,8 +84,9 @@ for ($i = 0; $i < sizeof($inv); $i++) {
         </tr>
         <?php
             $totalQuantity += $quantity;
-            $totalSales += $sales;
-            $totalCost += $cost;
+            $totalSales += $sales* $quantity;
+            $totalCost += $cost *$quantity;
+     
         }
         ?>
     </tbody>

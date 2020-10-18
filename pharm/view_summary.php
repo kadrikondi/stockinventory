@@ -32,10 +32,11 @@ if(sizeof($inv) > 0){
     <thead>
         <tr>
             <th>Product</th>
-            <th>Total Cost Price</th>
-            <th>Total Sales </th>
+            <th> Cost Price</th>
+            <th> Sales Price </th>
             <th>Total Profit Made</th>
             <th>Total Quantity Sold</th>
+            <th>totcost price</th>
         </tr>
     </thead>
     <tbody>
@@ -59,18 +60,19 @@ if(sizeof($inv) > 0){
             <td>N <?=$sales?></td>
             <td>N <?=$sales - $cost?> </td>
             <td><?=$quantity?></td>
+            <td>N <?=$sales * $quantity?></td>
         </tr>
         <?php
             $totalQuantity += $quantity;
-            $totalSales += $sales;
-            $totalCost += $cost;
+            $totalSales += $sales * $quantity;
+            $totalCost += $cost *$quantity;
         }
         ?>
     </tbody>
 </table>
 <div style="text-align:center; ">
         <div class="inf" style="padding-bottom:20px;">
-            <div class="d-title">Total Quantity of Products Sold</div>
+            <div class="d-title">Total Quantity of Products Solddd</div>
             <div class="d-child"><?=$totalQuantity?></div>
         </div>
         <div class="inf">

@@ -127,7 +127,7 @@ $cat = $product->viewProductsCategories();
                     $('<a />').on('click', function(e) {
                         e.preventDefault();
                         window.location = 'index.php';
-                    }).html('Close'),
+                    }).html('Close &nbsp; <br> <span onMouseOver="this.style.backgroundColor=#f8f8f8" onclick="window.print()">print</span>'),
                 k);
                 window.print();
 
