@@ -49,15 +49,17 @@ for ($i = 0; $i < sizeof($inv); $i++) {
         <input type="submit" name="filter" value="Show Products" style = "margin-left: 0; margin-bottom: 0;">
     </div>
 </form>
-<div class = "table-import" style="overflow: auto; display:block; height:500px;"> 
-    <table class = "products-table">
+<div class = "table-import" > 
+    <table class = "products-table" style="overflow: auto; display:block; height:300px;">
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Total Cost Price</th>
-                <th>Total Sales </th>
-                <th>Total Profit Made</th>
-                <th>Total Quantity Sold</th>
+               
+            <th>Product</th>
+            <th> Cost Price</th>
+            <th> Sales Price </th>
+            <th>Total Profit Made</th>
+            <th>Total Quantity Sold</th>
+            <th>totcost price</th>
             </tr>
         </thead>
     <tbody>
@@ -81,6 +83,7 @@ for ($i = 0; $i < sizeof($inv); $i++) {
             <td>N <?=$sales?></td>
             <td>N <?=$sales - $cost?> </td>
             <td><?=$quantity?></td>
+            <td>N <?=$sales * $quantity?></td>
         </tr>
         <?php
             $totalQuantity += $quantity;

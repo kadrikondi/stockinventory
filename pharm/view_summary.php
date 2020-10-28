@@ -28,7 +28,7 @@ for ($i = 0; $i < sizeof($inv); $i++) {
 if(sizeof($inv) > 0){
 ?>
 
-<table class = "products-table" style="overflow: auto; display:block; height:200px;">
+<table class = "products-table" style="overflow: auto; display:block; height:300px;">
     <thead>
         <tr>
             <th>Product</th>
